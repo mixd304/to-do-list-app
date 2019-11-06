@@ -9,7 +9,14 @@
 
   <tbody>
     <tr *ngFor = "let task of tasks">
-      <td class="checked"> {{ task.checked }} </td>
+      <ng-template [ngIf]="task.checked==false">
+        <td class="checked"> Test 123 {{ task.checked }} </td>
+      </ng-template>
+      <ng-template [ngIf]="task.checked==true">
+        <td class="checked"> {{ task.checked }} </td>
+      </ng-template>
+
+      <!--<td class="checked" *ngIf="task.checked==true"> {{ task.checked }} </td>-->
       <td> {{ task.title }} </td>
       <td> {{ task.tags }} </td>
     </tr>

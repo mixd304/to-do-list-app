@@ -8,7 +8,7 @@ import { Task } from '../task';
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [{
-    checked: false,
+    checked: true,
     description: 'Die Toilette reinigen',
     tags: ['Klo', 'Haushalt', 'WC'],
     title: 'Klo sauber machen'

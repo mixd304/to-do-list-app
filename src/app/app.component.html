@@ -1,6 +1,16 @@
 <div class="container-fluid">
-  <div>
-    <h1 class="display-2 mb-4">To-Do-Liste</h1>
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="display-3">To-Do-Liste</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="btn-group" role="group" aria-label="Index Group">
+        <a router-link='/table'> <button type="button" class="btn btn-primary">Hinzugügen</button> </a>
+      </div>
+    </div>
   </div>
   <router-outlet></router-outlet>
 </div>
