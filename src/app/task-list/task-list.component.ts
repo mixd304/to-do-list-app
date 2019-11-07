@@ -10,7 +10,7 @@ import { TasksService } from '../tasks.service';
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[];
-
+  prev: boolean;
   constructor(private taskService: TasksService) { }
 
   ngOnInit() {
@@ -19,6 +19,13 @@ export class TaskListComponent implements OnInit {
 
   getTasks(): void {
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+  }
+
+  toggle(task: Task): void {
+    console.log("Task: " + task.title + " checked: " + task.checked);
+    this.prev = task.checked;
+    task.checked = !this.prev;
+    this.taskService.updateTask(task).subscribe();
   }
 
 }
