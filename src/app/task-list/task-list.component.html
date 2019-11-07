@@ -8,7 +8,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor = "let task of tasks" routerLink="/details">
+    <tr *ngFor = "let task of tasks" routerLink="/details/{{task.id}}">
 
       <!-- Einen Button zum abhacken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
       <ng-template [ngIf]="task.checked==false">
@@ -28,12 +28,6 @@
 
       <td>
         <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
-
-        <!--
-        <ng-template *ngFor="let tag of task.tags">
-          <span>hallo</span>
-        </ng-template>
-        -->
       </td>
 
     </tr>

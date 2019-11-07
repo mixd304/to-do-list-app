@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Task } from '../task';
-import { TasksService } from "../tasks.service";
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-task-list',
