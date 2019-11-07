@@ -19,9 +19,15 @@ export class InMemoryDataService implements InMemoryDbService {
       }, {
         id: 2,
         checked: false,
-        description: 'Die Toilette reinigen 2 ',
-        tags: ['Klo', 'Haushalt', 'WC'],
-        title: 'Klo sauber machen 2'
+        description: 'Eier, Mehl, Milch, Zimt und Zucker',
+        tags: ['Kosten', 'Haushalt'],
+        title: 'Einkaufen'
+      }, {
+        id: 3,
+        checked: false,
+        description: 'Saison kennzeichen prägen, ummelden mit altem un neuem Kennzeichen und Versicherungsbestätigung',
+        tags: ['Kosten', 'Motorrad'],
+        title: 'Motorrad ummelden'
       }
     ];
     return {tasks};
