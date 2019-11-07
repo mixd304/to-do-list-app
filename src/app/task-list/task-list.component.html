@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover">
+<table class="table table-hover">
   <thead>
     <tr class="table-primary">
       <th class="checked">Erledigt</th>
@@ -8,15 +8,21 @@
   </thead>
 
   <tbody>
-    <tr *ngFor = "let task of tasks">
+    <tr *ngFor = "let task of tasks" routerLink="/details">
+
       <ng-template [ngIf]="task.checked==false">
-        <td class="checked"> Test 123 {{ task.checked }} </td>
+        <td class="checked">
+          <button type="button" class="btn btn-success" routerLink="/test"> <i class="fas fa-check"></i> </button>
+        </td>
       </ng-template>
       <ng-template [ngIf]="task.checked==true">
-        <td class="checked"> {{ task.checked }} </td>
+        <td class="checked">
+          <button type="button" class="btn btn-dark"> <i class="fas fa-trash"></i> </button>
+        </td>
       </ng-template>
       <td> {{ task.title }} </td>
       <td> {{ task.tags }} </td>
+
     </tr>
   </tbody>
 </table>
