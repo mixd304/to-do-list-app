@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Task } from '../task';
+import { TasksService } from "../tasks.service";
 
 @Component({
   selector: 'app-task-list',
@@ -7,21 +9,16 @@ import { Task } from '../task';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[] = [{
-    checked: true,
-    description: 'Die Toilette reinigen',
-    tags: ['Klo', 'Haushalt', 'WC'],
-    title: 'Klo sauber machen'
-  }, {
-    checked: false,
-    description: 'Die Toilette reinigen 2 ',
-    tags: ['Klo', 'Haushalt', 'WC'],
-    title: 'Klo sauber machen 2'
-  }];
+  tasks: Task[];
 
-  constructor() { }
+  constructor(private taskService: TasksService) { }
 
   ngOnInit() {
+    this.getTasks();
+  }
+
+  getTasks(): void {
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
 }
