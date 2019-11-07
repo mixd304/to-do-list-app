@@ -1,3 +1,19 @@
+
+<div class="btn-toolbar" role="group" aria-label="Index Group">
+
+  <div class="btn-grp">
+    <a router-link='/table'> <button type="button" class="btn btn-primary mr-3">Hinzufügen</button> </a>
+  </div>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
+    </div>
+    <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon">
+  </div>
+
+</div>
+
 <table class="table table-hover">
   <thead>
     <tr class="table-primary">
@@ -10,10 +26,10 @@
   <tbody>
     <tr *ngFor = "let task of tasks" routerLink="/details/{{task.id}}">
 
-      <!-- Einen Button zum abhacken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+      <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
       <ng-template [ngIf]="task.checked==false">
         <td class="checked">
-          <button type="button" class="btn btn-success" routerLink="/test"> <i class="fas fa-check"></i> </button>
+          <button type="button" class="btn btn-success"> <i class="fas fa-check"></i> </button>
         </td>
       </ng-template>
 

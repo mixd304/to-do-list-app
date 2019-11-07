@@ -1,2 +1,5 @@
 <p>{{ task.title }}</p>
-<a router-link='/table'> <button type="button" class="btn btn-primary" (click)="goBack()">Zurück</button> </a>
+<input [(ngModel)]="task.title" placeholder="title"/>
+<a router-link='/table'>
+  <button type="button" class="btn btn-primary" (click)="goBack()">Zurück</button>
+</a>
