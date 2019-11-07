@@ -10,6 +10,9 @@ import { Observable, of } from 'rxjs';
 })
 export class TasksService {
   private tasksUrl = 'api/tasks';
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient,
@@ -25,6 +28,12 @@ export class TasksService {
     const url = `${this.tasksUrl}/${id}`;
     return this.http.get<Task>(url).pipe(
       catchError(this.handleError<Task>(`getTask id=${id}`))
+    );
+  }
+
+  updateTask(task: Task): Observable<any> {
+    return this.http.put(this.tasksUrl, task, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateTask'))
     );
   }
 

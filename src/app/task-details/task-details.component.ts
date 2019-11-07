@@ -23,6 +23,10 @@ export class TaskDetailsComponent implements OnInit {
     this.tasksService.getTask(id).subscribe(task => this.task = task);
   }
 
+  save(): void {
+    this.tasksService.updateTask(this.task).subscribe(() => this.goBack());
+  }
+
   goBack(): void {
     this.location.back();
   }
