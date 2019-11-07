@@ -7,14 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
-import { TestComponent } from './test/test.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
     TaskDetailsComponent,
-    TestComponent
   ],
   imports: [
     BrowserModule,
