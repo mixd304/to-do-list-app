@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     AppComponent,
     TaskListComponent,
     TaskDetailsComponent,
+    AddTaskComponent,
   ],
   imports: [
     BrowserModule,

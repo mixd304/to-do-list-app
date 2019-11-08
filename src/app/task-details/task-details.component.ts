@@ -10,6 +10,7 @@ import { Task } from '../task';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent implements OnInit {
+  tagArray: string[];
 
   @Input() task: Task;
   constructor(private location: Location, private route: ActivatedRoute, private tasksService: TasksService) { }
@@ -23,12 +24,18 @@ export class TaskDetailsComponent implements OnInit {
     this.tasksService.getTask(id).subscribe(task => this.task = task);
   }
 
-  save(): void {
+  save(tags: string): void {
+    this.tagArray = tags.split(',');
+    this.task.tags = this.tagArray;
     this.tasksService.updateTask(this.task).subscribe(() => this.goBack());
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  customTrackBy(index: number, obj: any): any {
+    return index;
   }
 
 }
