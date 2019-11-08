@@ -22,7 +22,7 @@ export class TaskListComponent implements OnInit {
   }
 
   toggle(task: Task): void {
-    console.log("Task: " + task.title + " checked: " + task.checked);
+    console.log('Task: ' + task.title + ' checked: ' + task.checked);
     this.prev = task.checked;
     task.checked = !this.prev;
     this.taskService.updateTask(task).subscribe();
