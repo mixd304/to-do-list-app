@@ -2,7 +2,7 @@
 <div class="btn-toolbar" role="group" aria-label="Index Group">
 
   <div class="btn-grp">
-    <a router-link='/table'> <button type="button" class="btn btn-primary mr-3">Hinzufügen</button> </a>
+    <a router-link='/table'> <button type="button" class="btn btn-primary mr-3" routerLink="/add">Hinzufügen</button> </a>
   </div>
 
   <div class="input-group">
@@ -19,7 +19,7 @@
   <table class="table table-hover">
     <thead>
       <tr class="table-primary">
-        <th class="checked">Erledigen</th>
+        <th class="checked">Status</th>
         <th>Titel</th>
         <th>Tags</th>
       </tr>
@@ -42,7 +42,7 @@
           </td>
         </ng-template>
 
-        <td routerLink="/details/{{task.id}}"> {{ task.title }} </td>
+        <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
 
         <td routerLink="/details/{{task.id}}">
           <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
