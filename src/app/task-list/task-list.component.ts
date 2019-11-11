@@ -9,7 +9,7 @@ import { TasksService } from '../tasks.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  showDoneTasks: boolean = true;
+  showDoneTasks = true;
   tasks: Task[];
   prev: boolean;
   constructor(private taskService: TasksService) { }
