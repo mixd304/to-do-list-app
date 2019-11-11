@@ -43,6 +43,12 @@ export class TasksService {
     );
   }
 
+  searchTask(term: string): Observable<any> {
+    return this.http.get<Task[]>(`${this.tasksUrl}/?title=${term}`).pipe(
+      catchError(this.handleError<any>('searchTask'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

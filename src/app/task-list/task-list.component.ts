@@ -28,4 +28,8 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateTask(task).subscribe();
   }
 
+  searchTask(term: string): void {
+    this.taskService.searchTask(term).subscribe(tasks => this.tasks = tasks);
+  }
+
 }

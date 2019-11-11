@@ -9,7 +9,7 @@
     <div class="input-group-prepend">
       <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
     </div>
-    <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon">
+    <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon" (change)="searchTask($event.target.value)">
   </div>
 
 </div>
