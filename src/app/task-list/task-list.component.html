@@ -2,8 +2,11 @@
 <div class="btn-toolbar" role="group" aria-label="Index Group">
     <!-- Hinzufügen-Button -->
     <div class="btn-grp">
-      <a router-link='/table'> <button type="button" class="btn btn-primary" routerLink="/add">Hinzufügen</button> </a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Hinzufügen</button>
     </div>
+
+    <!-- Modaler Inhalt für das Hinzufügen-->
+    <app-add-task (saved)="getTasks()"></app-add-task>
 
     <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
     <div class="input-group ml-5">

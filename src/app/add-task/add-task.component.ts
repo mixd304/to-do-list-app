@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { TasksService } from '../tasks.service';
 import { Task } from '../task';
 import { Location } from '@angular/common';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-add-task',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 export class AddTaskComponent implements OnInit {
   task: Task;
   tagArray: string[];
+  @Output() saved = new EventEmitter();
 
   constructor(private tasksService: TasksService, private location: Location) { }
 
@@ -18,7 +20,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   add(title: string, description: string, tags: string): void {
-    if(!title) { return; }
+    if ( !title ) { return; }
     this.task = new Task();
 
     this.tagArray = tags.split(',');
@@ -28,11 +30,11 @@ export class AddTaskComponent implements OnInit {
     this.task.tags = this.tagArray;
 
     this.tasksService.addTask(this.task);
-    this.goBack();
+
+    this.saved.emit(null);
   }
 
   goBack(): void {
     this.location.back();
   }
-
 }

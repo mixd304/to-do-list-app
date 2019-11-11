@@ -44,13 +44,6 @@ export class TasksService {
     console.log("Title: " + task.title + ", ID: " + task.id );
     localStorage.setItem('' + task.id, this.jsonObj);
   }
-  /*
-  searchTask(term: string): Observable<any> {
-    return this.http.get<Task[]>(`${this.tasksUrl}/?title=${term}`).pipe(
-      catchError(this.handleError<any>('searchTask'))
-    );
-  }
-  */
 
   searchTask(term: string): Task[] {
     let i;

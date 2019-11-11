@@ -7,7 +7,7 @@ import { Task } from '../task';
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
-  styleUrls: ['./task-details.component.css']
+  styleUrls: ['./task-details.component.css'],
 })
 export class TaskDetailsComponent implements OnInit {
   tagArray: string[];
@@ -28,6 +28,7 @@ export class TaskDetailsComponent implements OnInit {
     this.tagArray = tags.split(',');
     this.task.tags = this.tagArray;
     this.tasksService.updateTask(this.task);
+    this.goBack();
   }
 
   goBack(): void {
