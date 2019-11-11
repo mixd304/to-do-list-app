@@ -39,4 +39,9 @@ export class TaskDetailsComponent implements OnInit {
     return index;
   }
 
+  delete(): void {
+    this.tasksService.deleteTask(this.task);
+    this.goBack();
+  }
+
 }
