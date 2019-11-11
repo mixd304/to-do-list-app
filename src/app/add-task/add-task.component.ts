@@ -27,7 +27,8 @@ export class AddTaskComponent implements OnInit {
     this.task.description = description;
     this.task.tags = this.tagArray;
 
-    this.tasksService.addTask(this.task).subscribe(() => this.goBack());
+    this.tasksService.addTask(this.task);
+    this.goBack();
   }
 
   goBack(): void {

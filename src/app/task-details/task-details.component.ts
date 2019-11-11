@@ -21,13 +21,13 @@ export class TaskDetailsComponent implements OnInit {
 
   getTask(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.tasksService.getTask(id).subscribe(task => this.task = task);
+    this.task = this.tasksService.getTask(id);
   }
 
   save(tags: string): void {
     this.tagArray = tags.split(',');
     this.task.tags = this.tagArray;
-    this.tasksService.updateTask(this.task).subscribe(() => this.goBack());
+    this.tasksService.updateTask(this.task);
   }
 
   goBack(): void {

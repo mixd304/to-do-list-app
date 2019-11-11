@@ -10,6 +10,9 @@ import { Observable, of } from 'rxjs';
 })
 export class TasksService {
   private tasksUrl = 'api/tasks';
+  private jsonObj: string;
+  private tasks: Task[] = [];
+
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -18,6 +21,7 @@ export class TasksService {
     private http: HttpClient,
   ) { }
 
+  /*
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.tasksUrl).pipe(
       catchError(this.handleError<Task[]>('getTasks', []))
@@ -41,6 +45,31 @@ export class TasksService {
     return this.http.post(this.tasksUrl, task, this.httpOptions).pipe(
       catchError(this.handleError<any>('addTask'))
     );
+  }
+  */
+
+  getTask(id: number): Task {
+    return JSON.parse(localStorage.getItem(id + '')) as Task;
+  }
+
+  updateTask(task: Task): void {
+    localStorage.setItem(task.id + '', JSON.stringify(task));
+  }
+
+  getTasks(): Task[] {
+    let i;
+    this.tasks = [];
+    for (i = 1; i <= localStorage.length; i++) {
+      this.tasks.push(JSON.parse(localStorage.getItem(''+i)) as Task);
+    }
+    return this.tasks;
+  }
+
+  addTask(task: Task): void {
+    task.id = localStorage.length + 1;
+    this.jsonObj = JSON.stringify(task);
+    console.log("Title: " + task.title + ", ID: " + task.id );
+    localStorage.setItem('' + task.id, this.jsonObj);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

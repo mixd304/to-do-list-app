@@ -18,14 +18,14 @@ export class TaskListComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+    this.tasks = this.taskService.getTasks();
   }
 
   toggle(task: Task): void {
     console.log('Task: ' + task.title + ' checked: ' + task.checked);
     this.prev = task.checked;
     task.checked = !this.prev;
-    this.taskService.updateTask(task).subscribe();
+    this.taskService.updateTask(task);
   }
 
 }
