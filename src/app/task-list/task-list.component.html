@@ -1,54 +1,80 @@
 
 <div class="btn-toolbar" role="group" aria-label="Index Group">
-
-  <div class="btn-grp">
-    <a router-link='/table'> <button type="button" class="btn btn-primary mr-3" routerLink="/add">Hinzufügen</button> </a>
-  </div>
-
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
+    <!-- Hinzufügen-Button -->
+    <div class="btn-grp">
+      <a router-link='/table'> <button type="button" class="btn btn-primary" routerLink="/add">Hinzufügen</button> </a>
     </div>
-    <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon" (change)="searchTask($event.target.value)">
+
+    <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
+    <div class="input-group ml-5">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" aria-label="Checkbox for following text input" (click)="toogleShowDoneTasks()" checked>
+          </div>
+        </div>
+        <span class="input-group-text"> Erledigte anzeigen </span>
+      </div>
+
+    <!-- Suchfeld -->
+    <div class="input-group ml-5">
+      <div class="input-group-prepend">
+        <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
+      </div>
+      <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon" (change)="searchTask($event.target.value)">
+    </div>
   </div>
 
-</div>
+  <!-- Tabelle -->
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <!-- erste Zeile der Tabelle (Überschriften) -->
+      <thead>
+        <tr class="table-primary">
+          <th class="checked">Status</th>
+          <th>Titel</th>
+          <th>Tags</th>
+        </tr>
+      </thead>
 
-<div class="table-responsive">
+      <tbody>
+        <tr *ngFor = "let task of tasks">
 
-  <table class="table table-hover">
-    <thead>
-      <tr class="table-primary">
-        <th class="checked">Status</th>
-        <th>Titel</th>
-        <th>Tags</th>
-      </tr>
-    </thead>
+          <!-- Status -->
+            <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
+            <ng-template [ngIf]="task.checked==false">
 
-    <tbody>
-      <tr *ngFor = "let task of tasks">
+              <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+              <td class="checked">
+                <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
+              </td>
 
-        <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
-        <ng-template [ngIf]="task.checked==false">
-          <td class="checked">
-            <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
-          </td>
-        </ng-template>
+              <!-- Titel -->
+              <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
 
-        <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
-        <ng-template [ngIf]="task.checked==true">
-          <td class="checked">
-            <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
-          </td>
-        </ng-template>
+              <!-- Tags -->
+              <td routerLink="/details/{{task.id}}">
+                <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
+              </td>
+            </ng-template>
 
-        <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
+            <!-- Wenn der Task bereits erledigt wurde, wird er nur angezeigt, wenn die Checkbox ausgewählt wurde -->
+            <ng-template [ngIf]="task.checked==true">
+              <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
+              <ng-template [ngIf]="showDoneTasks==true">
+                <td class="checked">
+                  <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
+                </td>
 
-        <td routerLink="/details/{{task.id}}">
-          <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
-        </td>
+                <!-- Titel -->
+                <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
 
-      </tr>
-    </tbody>
-  </table>
-</div>
+                <!-- Tags -->
+                <td routerLink="/details/{{task.id}}">
+                <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
+              </td>
+            </ng-template>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>

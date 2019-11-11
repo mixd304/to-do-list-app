@@ -9,6 +9,7 @@ import { TasksService } from '../tasks.service';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  showDoneTasks: boolean = true;
   tasks: Task[];
   prev: boolean;
   constructor(private taskService: TasksService) { }
@@ -30,6 +31,10 @@ export class TaskListComponent implements OnInit {
 
   searchTask(term: string): void {
     this.taskService.searchTask(term).subscribe(tasks => this.tasks = tasks);
+  }
+
+  toogleShowDoneTasks(): void {
+    this.showDoneTasks = !this.showDoneTasks;
   }
 
 }
