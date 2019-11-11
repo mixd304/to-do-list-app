@@ -30,7 +30,7 @@ export class TaskListComponent implements OnInit {
   }
 
   searchTask(term: string): void {
-    this.taskService.searchTask(term).subscribe(tasks => this.tasks = tasks);
+    this.tasks = this.taskService.searchTask(term);
   }
 
   toogleShowDoneTasks(): void {
