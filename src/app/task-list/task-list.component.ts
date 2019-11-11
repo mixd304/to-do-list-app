@@ -9,6 +9,7 @@ import { TasksService } from '../tasks.service';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  showDoneTasks: boolean = true;
   tasks: Task[];
   prev: boolean;
   constructor(private taskService: TasksService) { }
@@ -26,6 +27,14 @@ export class TaskListComponent implements OnInit {
     this.prev = task.checked;
     task.checked = !this.prev;
     this.taskService.updateTask(task);
+  }
+
+  searchTask(term: string): void {
+    this.taskService.searchTask(term).subscribe(tasks => this.tasks = tasks);
+  }
+
+  toogleShowDoneTasks(): void {
+    this.showDoneTasks = !this.showDoneTasks;
   }
 
 }
