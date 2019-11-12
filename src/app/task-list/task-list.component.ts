@@ -11,11 +11,13 @@ import { TasksService } from '../tasks.service';
 export class TaskListComponent implements OnInit {
   showDoneTasks = true;
   tasks: Task[];
+  deleteIDs: string[] = [];
   prev: boolean;
   constructor(private taskService: TasksService) { }
 
   ngOnInit() {
     this.getTasks();
+    this.deleteIDs = [];
   }
 
   getTasks(): void {
@@ -24,8 +26,7 @@ export class TaskListComponent implements OnInit {
 
   toggle(task: Task): void {
     console.log('Task: ' + task.title + ' checked: ' + task.checked);
-    this.prev = task.checked;
-    task.checked = !this.prev;
+    task.checked = !task.checked;
     this.taskService.updateTask(task);
   }
 
@@ -36,5 +37,45 @@ export class TaskListComponent implements OnInit {
   toogleShowDoneTasks(): void {
     this.showDoneTasks = !this.showDoneTasks;
   }
+
+  /*toggleDelete(id: string): void {
+    console.log('AUFRUF' + id);
+
+    if(this.deleteIDs.includes(id)) {
+      console.log('löschen');
+      this.deleteIDs.splice(this.deleteIDs.indexOf(id), 1);
+    } else {
+      console.log('hinzufügen');
+      this.deleteIDs.push(id);
+    }
+
+    for(let i = 0; i < this.deleteIDs.length; i++) {
+      console.log(this.deleteIDs[i]);
+    }
+  }*/
+
+  deleteTasks(): void {
+    this.tasks.forEach(task => {
+      let element: HTMLInputElement = document.getElementById('delete_' + task.id) as unknown as HTMLInputElement;
+
+      if (element == null) {
+        console.log('Element == null');
+      } else {
+        if(element.checked) {
+          this.taskService.deleteTask(task);
+        }
+      }
+    });
+  }
+
+  getValue(id: string): boolean {
+    if (this.deleteIDs.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 
 }
