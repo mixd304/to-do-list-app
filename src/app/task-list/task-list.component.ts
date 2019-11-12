@@ -56,6 +56,7 @@ export class TaskListComponent implements OnInit {
         }
       }
     });
+    this.getTasks();
   }
 
   getValue(id: string): boolean {
