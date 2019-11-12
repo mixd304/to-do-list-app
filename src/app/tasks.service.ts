@@ -27,12 +27,9 @@ export class TasksService {
     this.tasks = [];
     for (i = 1; i <= (localStorage.getItem('0') as unknown as number); i++) {
       const task: Task = JSON.parse(localStorage.getItem('' + i)) as Task;
-      console.log(task);
 
       if (task == null) {
-        console.log('kaputt');
       } else {
-        console.log('nicht kaputt');
         this.tasks.push(task);
       }
     }

@@ -2,11 +2,21 @@ import { Component, OnInit } from '@angular/core';
 
 import { Task } from '../task';
 import { TasksService } from '../tasks.service';
+import { trigger, transition, useAnimation, state, style } from '@angular/animations';
+import { slideOutRight, slideInLeft } from 'ng-animate';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
+  /*
+  animations:[
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('in => void', useAnimation(slideOutRight))
+    ])
+  ]
+  */
 })
 export class TaskListComponent implements OnInit {
   showDoneTasks = true;
@@ -22,8 +32,10 @@ export class TaskListComponent implements OnInit {
     this.deleteIDs = [];
   }
 
-  swipe(action =  this.SWIPE_ACTION.RIGHT) {
-    console.log(action);
+  swipe(action =  this.SWIPE_ACTION.RIGHT, task: Task) {
+    console.log(action, task);
+    this.taskService.deleteTask(task);
+    this.getTasks();
   }
 
   getTasks(): void {
@@ -66,7 +78,4 @@ export class TaskListComponent implements OnInit {
       return false;
     }
   }
-
-
-
 }

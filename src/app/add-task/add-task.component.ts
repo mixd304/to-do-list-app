@@ -33,8 +33,4 @@ export class AddTaskComponent implements OnInit {
 
     this.saved.emit(null);
   }
-
-  goBack(): void {
-    this.location.back();
-  }
 }

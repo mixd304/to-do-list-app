@@ -5,13 +5,13 @@
 
   <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
   <div class="input-group">
-      <div class="input-group-prepend">
-        <div class="input-group-text">
-          <input type="checkbox" (click)="toogleShowDoneTasks()" checked>
-        </div>
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <input type="checkbox" (click)="toogleShowDoneTasks()" checked>
       </div>
-      <span class="input-group-text"> Erledigte anzeigen </span>
     </div>
+    <span class="input-group-text"> Erledigte anzeigen </span>
+  </div>
 
   <!-- Suchfeld -->
   <div class="input-group">
@@ -36,7 +36,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor = "let task of tasks" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" >
+      <tr *ngFor = "let task of tasks" (swiperight)="swipe($event.type, task)" > <!--@flyInOut-->
 
         <!-- Status -->
           <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
