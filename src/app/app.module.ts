@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     TaskListComponent,
     TaskDetailsComponent,
     AddTaskComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

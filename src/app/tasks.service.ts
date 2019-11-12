@@ -60,7 +60,7 @@ export class TasksService {
   }
 
   searchTask(term: string): Task[] {
-    let i;
+    let i: string | number;
     this.tasks = [];
     for (i = 1; i <= (localStorage.getItem('0') as unknown as number); i++) {
       const task: Task = JSON.parse(localStorage.getItem('' + i)) as Task;

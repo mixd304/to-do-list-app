@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TasksService } from '../tasks.service';
 import { Task } from '../task';
+import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-task-details',
@@ -40,6 +41,8 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   delete(): void {
+
+
     this.tasksService.deleteTask(this.task);
     this.goBack();
   }
