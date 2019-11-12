@@ -46,7 +46,7 @@ export class TaskListComponent implements OnInit {
 
   deleteTasks(): void {
     this.tasks.forEach(task => {
-      let element: HTMLInputElement = document.getElementById('delete_' + task.id) as unknown as HTMLInputElement;
+      const element: HTMLInputElement = document.getElementById('delete_' + task.id) as unknown as HTMLInputElement;
 
       if (element == null) {
         console.log('Element == null');

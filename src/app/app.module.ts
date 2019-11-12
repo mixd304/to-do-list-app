@@ -12,6 +12,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TestComponent } from './test/test.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { TestComponent } from './test/test.component';
     TaskDetailsComponent,
     AddTaskComponent,
     TestComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
