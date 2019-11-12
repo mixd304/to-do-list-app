@@ -1,15 +1,10 @@
-
-<div class="btn-toolbar" role="group" aria-label="Index Group">
-  <!-- Hinzufügen-Button -->
-  <div class="btn-grp">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Hinzufügen</button>
-  </div>
-
-  <!-- Modaler Inhalt für das Hinzufügen-->
-  <app-add-task (saved)="getTasks()"></app-add-task>
+<!-- Hinzufügen-Button -->
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Hinzufügen</button>
+  <button type="button" class="btn btn-danger" (click)="deleteTasks()">Löschen</button>
 
   <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
-  <div class="input-group ml-5">
+  <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
           <input type="checkbox" (click)="toogleShowDoneTasks()" checked>
@@ -19,42 +14,58 @@
     </div>
 
   <!-- Suchfeld -->
-  <div class="input-group ml-5">
+  <div class="input-group">
     <div class="input-group-prepend">
       <div class="input-group-text" id="btnGroupAddon"><i class="fas fa-search"></i></div>
     </div>
     <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon" (change)="searchTask($event.target.value)">
   </div>
-
-  <!-- Löschen-Button -->
-  <div class="btn-grp">
-    <button type="button" class="btn btn-primary" (click)="deleteTasks()">Löschen</button>
-  </div>
 </div>
 
-  <!-- Tabelle -->
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <!-- erste Zeile der Tabelle (Überschriften) -->
-      <thead>
-        <tr class="table-primary">
-          <th class="checked">Status</th>
-          <th>Titel</th>
-          <th>Tags</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
+<!-- Tabelle -->
+<div class="table-responsive">
+  <table class="table table-hover">
+    <!-- erste Zeile der Tabelle (Überschriften) -->
+    <thead>
+      <tr class="table-primary">
+        <th class="checked">Status</th>
+        <th>Titel</th>
+        <th>Tags</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr *ngFor = "let task of tasks">
+    <tbody>
+      <tr *ngFor = "let task of tasks" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" >
 
-          <!-- Status -->
-            <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
-            <ng-template [ngIf]="task.checked==false">
+        <!-- Status -->
+          <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
+          <ng-template [ngIf]="task.checked==false">
 
-              <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+            <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+            <td class="checked">
+              <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
+            </td>
+
+            <!-- Titel -->
+            <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
+
+            <!-- Tags -->
+            <td routerLink="/details/{{task.id}}">
+              <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
+            </td>
+            <td>
+              <input type="checkbox" id="delete_{{task.id}}">
+            </td>
+
+          </ng-template>
+
+          <!-- Wenn der Task bereits erledigt wurde, wird er nur angezeigt, wenn die Checkbox ausgewählt wurde -->
+          <ng-template [ngIf]="task.checked==true">
+            <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
+            <ng-template [ngIf]="showDoneTasks==true">
               <td class="checked">
-                <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
+                <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
               </td>
 
               <!-- Titel -->
@@ -62,35 +73,16 @@
 
               <!-- Tags -->
               <td routerLink="/details/{{task.id}}">
-                <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
-              </td>
-              <td>
-                <input type="checkbox" id="delete_{{task.id}}">
-              </td>
-
-            </ng-template>
-
-            <!-- Wenn der Task bereits erledigt wurde, wird er nur angezeigt, wenn die Checkbox ausgewählt wurde -->
-            <ng-template [ngIf]="task.checked==true">
-              <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
-              <ng-template [ngIf]="showDoneTasks==true">
-                <td class="checked">
-                  <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
-                </td>
-
-                <!-- Titel -->
-                <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
-
-                <!-- Tags -->
-                <td routerLink="/details/{{task.id}}">
-                <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
-              </td>
-              <td>
-                <input type="checkbox" id="delete_{{task.id}}">
-              </td>
-            </ng-template>
+              <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
+            </td>
+            <td>
+              <input type="checkbox" id="delete_{{task.id}}">
+            </td>
           </ng-template>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Modaler Inhalt für das Hinzufügen-->
+<app-add-task (saved)="getTasks()"></app-add-task>

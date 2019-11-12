@@ -13,11 +13,17 @@ export class TaskListComponent implements OnInit {
   tasks: Task[];
   deleteIDs: string[] = [];
   prev: boolean;
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
   constructor(private taskService: TasksService) { }
 
   ngOnInit() {
     this.getTasks();
     this.deleteIDs = [];
+  }
+
+  swipe(action =  this.SWIPE_ACTION.RIGHT) {
+    console.log(action);
   }
 
   getTasks(): void {
@@ -37,22 +43,6 @@ export class TaskListComponent implements OnInit {
   toogleShowDoneTasks(): void {
     this.showDoneTasks = !this.showDoneTasks;
   }
-
-  /*toggleDelete(id: string): void {
-    console.log('AUFRUF' + id);
-
-    if(this.deleteIDs.includes(id)) {
-      console.log('löschen');
-      this.deleteIDs.splice(this.deleteIDs.indexOf(id), 1);
-    } else {
-      console.log('hinzufügen');
-      this.deleteIDs.push(id);
-    }
-
-    for(let i = 0; i < this.deleteIDs.length; i++) {
-      console.log(this.deleteIDs[i]);
-    }
-  }*/
 
   deleteTasks(): void {
     this.tasks.forEach(task => {

@@ -6,10 +6,12 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     TaskListComponent,
     TaskDetailsComponent,
     AddTaskComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { AddTaskComponent } from './add-task/add-task.component';
       InMemoryDataService, { dataEncapsulation: false }
     ),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
