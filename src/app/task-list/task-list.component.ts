@@ -4,6 +4,7 @@ import { Task } from '../task';
 import { TasksService } from '../tasks.service';
 import { trigger, transition, useAnimation, state, style } from '@angular/animations';
 import { slideOutRight, slideInLeft } from 'ng-animate';
+import { ConfirmationService } from '../confirmation.service';
 
 @Component({
   selector: 'app-task-list',
@@ -27,7 +28,7 @@ export class TaskListComponent implements OnInit {
 
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
-  constructor(private taskService: TasksService) { }
+  constructor(private taskService: TasksService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.getTasks();
@@ -59,6 +60,8 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTasks(): void {
+    let tasksToDelete: Task[] = [];
+
     this.tasks.forEach(task => {
       const element: HTMLInputElement = document.getElementById('delete_' + task.id) as unknown as HTMLInputElement;
 
@@ -66,11 +69,18 @@ export class TaskListComponent implements OnInit {
         console.log('Element == null');
       } else {
         if(element.checked) {
-          document.getElementById('row_' + task.id).remove();
-          this.taskService.deleteTask(task);
+          //document.getElementById('row_' + task.id).remove();
+          //this.taskService.deleteTask(task);
+          tasksToDelete.push(task);
+          document.getElementById("list").insertAdjacentHTML(
+            'beforeend',
+            '<li>' + task.title + '</li>'
+          );
         }
       }
     });
+    this.confirmationService.setTasks(tasksToDelete);
+    //this.getTasks();
   }
 
   getValue(id: string): boolean {

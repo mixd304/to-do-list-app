@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ConfirmationService } from '../confirmation.service';
 import { TasksService } from '../tasks.service';
 import { Task } from '../task';
 import { Location } from '@angular/common';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class ConfirmDialogComponent implements OnInit {
   tasks: Task[] = [];
+  @Output() deletedEvent = new EventEmitter();
 
   constructor(private confirmationService: ConfirmationService,
               private taskService: TasksService,
@@ -27,7 +29,7 @@ export class ConfirmDialogComponent implements OnInit {
       this.taskService.deleteTask(task);
     });
 
-    this.goBack();
+    this.deletedEvent.emit('deleted');
   }
 
   goBack(): void {

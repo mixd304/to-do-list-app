@@ -51,7 +51,7 @@ export class TaskDetailsComponent implements OnInit {
   deleteClicked(): void {
     document.getElementById("list").insertAdjacentHTML(
       'beforeend',
-      this.task.title
+      '<li>' + this.task.title + '</li>'
     );
     this.confirmationService.setTasks([this.task]);
   }
