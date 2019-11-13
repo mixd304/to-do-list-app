@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TasksService } from '../tasks.service';
 import { Task } from '../task';
-import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
+import { ConfirmationService } from '../confirmation.service';
 
 @Component({
   selector: 'app-task-details',
@@ -14,7 +14,10 @@ export class TaskDetailsComponent implements OnInit {
   tagArray: string[];
 
   @Input() task: Task;
-  constructor(private location: Location, private route: ActivatedRoute, private tasksService: TasksService) { }
+  constructor(private location: Location,
+              private route: ActivatedRoute,
+              private tasksService: TasksService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.getTask();
@@ -41,10 +44,16 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   delete(): void {
-
-
     this.tasksService.deleteTask(this.task);
     this.goBack();
+  }
+
+  deleteClicked(): void {
+    document.getElementById("list").insertAdjacentHTML(
+      'beforeend',
+      this.task.title
+    );
+    this.confirmationService.setTasks([this.task]);
   }
 
 }

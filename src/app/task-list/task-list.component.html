@@ -1,7 +1,7 @@
 <!-- Hinzufügen-Button -->
 <div class="btn-group" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Hinzufügen</button>
-  <button type="button" class="btn btn-danger" (click)="deleteTasks()">Löschen</button>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Löschen</button>
 
   <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
   <div class="input-group">
@@ -86,3 +86,4 @@
 </div>
 <!-- Modaler Inhalt für das Hinzufügen-->
 <app-add-task (saved)="getTasks()"></app-add-task>
+<app-confirm-dialog></app-confirm-dialog>
