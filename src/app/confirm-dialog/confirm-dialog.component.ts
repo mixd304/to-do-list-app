@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from '../confirmation.service';
+import { TasksService } from '../tasks.service';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit {
+  tasks: Task[] = [];
 
-  constructor() { }
+  constructor(private confirmationService: ConfirmationService,
+              private taskService: TasksService) {
+
+              }
 
   ngOnInit() {
   }
 
+  deleteClicked(): void {
+    this.tasks = this.confirmationService.getTasks();
+  }
 }

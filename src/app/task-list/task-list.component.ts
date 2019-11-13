@@ -34,8 +34,8 @@ export class TaskListComponent implements OnInit {
     this.deleteIDs = [];
   }
 
-  swipe(action =  this.SWIPE_ACTION.RIGHT, task: Task) {
-    console.log(action, task);
+  swipe(eventType, task: Task) {
+    console.log(eventType);
     this.taskService.deleteTask(task);
     this.getTasks();
   }
@@ -66,11 +66,11 @@ export class TaskListComponent implements OnInit {
         console.log('Element == null');
       } else {
         if(element.checked) {
+          document.getElementById('row_' + task.id).remove();
           this.taskService.deleteTask(task);
         }
       }
     });
-    this.getTasks();
   }
 
   getValue(id: string): boolean {
