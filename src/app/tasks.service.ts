@@ -21,7 +21,6 @@ export class TasksService {
 
   updateTask(task: Task): void {
     localStorage.setItem(task.id + '', JSON.stringify(task));
-    this.tasks.push(task);
   }
 
   getTasks(): Observable<Task[]> {
@@ -52,7 +51,6 @@ export class TasksService {
     this.jsonObj = JSON.stringify(task);
     console.log('Title: ' + task.title + ', ID: ' + task.id );
     localStorage.setItem('' + task.id, this.jsonObj);
-    this.tasks.push(task);
   }
 
   deleteTask(task: Task): void {
