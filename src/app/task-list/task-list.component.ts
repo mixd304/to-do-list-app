@@ -52,7 +52,7 @@ export class TaskListComponent implements OnInit {
   }
 
   searchTask(term: string): void {
-    this.taskService.searchTask(term);
+    this.tasks = this.taskService.searchTask(term);
   }
 
   toogleShowDoneTasks(): void {

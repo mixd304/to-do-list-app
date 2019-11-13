@@ -68,7 +68,8 @@ export class TasksService {
     //this.tasks.splice(i);
   }
 
-  searchTask(term: string): void {
+  searchTask(term: string): Task[] {
+    term = term.toLowerCase();
     let i: string | number;
     this.tasks = [];
     for (i = 1; i <= (localStorage.getItem('0') as unknown as number); i++) {
@@ -76,10 +77,11 @@ export class TasksService {
       if (task == null) {
 
       } else {
-        if (task.title.match('.*' + term + '.*')) {
+        if (task.title.toLowerCase().match('.*' + term + '.*')) {
           this.tasks.push(task);
         }
       }
     }
+    return this.tasks;
   }
 }

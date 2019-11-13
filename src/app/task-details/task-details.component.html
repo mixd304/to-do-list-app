@@ -8,7 +8,7 @@
 </div>
 <div class="form-group">
   <label for="tagsInput">Tags</label>
-  <input [ngModel]="task.tags" type="text" class="form-control" id="tagsInput" placeholder="task.tags" #tags>
+  <input [ngModel]="task.tags" type="text" class="form-control" id="tagsInput" placeholder="Tags" #tags>
 </div>
 
 <div class="btn-group" role="group" aria-label="Basic example">
@@ -17,4 +17,4 @@
   <button type="submit" class="btn btn-success" (click)="save(tags.value)">Speichern</button>
 </div>
 
-<app-confirm-dialog></app-confirm-dialog>
+<app-confirm-dialog (deletedEvent)="goBack()"></app-confirm-dialog>
