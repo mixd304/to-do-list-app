@@ -11,18 +11,20 @@ import { slideOutRight, slideInLeft } from 'ng-animate';
   styleUrls: ['./task-list.component.css'],
   /*
   animations:[
-    trigger('flyInOut', [
+    trigger('flyOut', [
       state('in', style({ transform: 'translateX(0)' })),
-      transition('in => void', useAnimation(slideOutRight))
+      transition(':leave', useAnimation(slideOutRight))
     ])
   ]
-  */
+*/
 })
+
 export class TaskListComponent implements OnInit {
   showDoneTasks = true;
   tasks: Task[];
   deleteIDs: string[] = [];
   prev: boolean;
+
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   constructor(private taskService: TasksService) { }
@@ -39,7 +41,7 @@ export class TaskListComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.tasks = this.taskService.getTasks();
+    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
   toggle(task: Task): void {
@@ -49,7 +51,7 @@ export class TaskListComponent implements OnInit {
   }
 
   searchTask(term: string): void {
-    this.tasks = this.taskService.searchTask(term);
+    this.taskService.searchTask(term);
   }
 
   toogleShowDoneTasks(): void {

@@ -36,7 +36,8 @@
     </thead>
 
     <tbody>
-      <tr *ngFor = "let task of tasks" (swiperight)="swipe($event.type, task)" > <!--@flyInOut-->
+      <tr *ngFor = "let task of tasks" (swiperight)="swipe($event.type, task)">
+        <!--@flyOut @flyOut (swiperight)="swipe($event.type, task)" id="flyOut_{{task.id}} -->
 
         <!-- Status -->
           <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->

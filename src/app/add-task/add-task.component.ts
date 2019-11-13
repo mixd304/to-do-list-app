@@ -31,6 +31,6 @@ export class AddTaskComponent implements OnInit {
 
     this.tasksService.addTask(this.task);
 
-    this.saved.emit(null);
+    //this.saved.emit(null);
   }
 }
