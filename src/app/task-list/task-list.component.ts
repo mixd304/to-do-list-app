@@ -6,6 +6,10 @@ import { trigger, transition, useAnimation, state, style } from '@angular/animat
 import { slideOutRight, slideInLeft } from 'ng-animate';
 import { ConfirmationService } from '../confirmation.service';
 
+/*
+  Klasse zum Anzeigen der To-Do's in einer Liste
+*/
+
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -19,7 +23,6 @@ import { ConfirmationService } from '../confirmation.service';
   ]
 */
 })
-
 export class TaskListComponent implements OnInit {
   showDoneTasks = true;
   tasks: Task[];
@@ -78,7 +81,7 @@ export class TaskListComponent implements OnInit {
       } else {
         if(element.checked) {
           tasksToDelete.push(task);
-          document.getElementById("list").insertAdjacentHTML(
+          document.getElementById('list').insertAdjacentHTML(
             'beforeend',
             '<li>' + task.title + '</li>'
           );

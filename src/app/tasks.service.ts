@@ -86,7 +86,6 @@ export class TasksService {
         break;
       }
     }
-    //this.tasks.splice(i);
   }
 
   /*
