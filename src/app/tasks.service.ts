@@ -4,6 +4,9 @@ import { Observable, of } from 'rxjs';
 
 import { Task } from './task';
 
+/*
+  Service der die Anwednung mit den To-Do' aus dem LocalStorage versorgt
+*/
 @Injectable({
   providedIn: 'root'
 })
@@ -15,14 +18,27 @@ export class TasksService {
     private http: HttpClient,
   ) { }
 
+  /*
+    Ließt einen To-Do aus dem LocalStorage
+    Dabei wird der JSON String in ein Objekt umgewandelt
+    und als Task zurückgegeben
+  */
   getTask(id: number): Task {
     return JSON.parse(localStorage.getItem(id + '')) as Task;
   }
 
+  /*
+    ersetzt einen Task in dem LocalStorage anhand der ID
+  */
   updateTask(task: Task): void {
     localStorage.setItem(task.id + '', JSON.stringify(task));
   }
 
+  /*
+    ließt alle To-Do's aus dem LocalStorage und gibt sie als Task Array zurück
+    die Stelle mit dem Key '0' nehmen wir dabei um die Anzahl der To-Do's zu speichern
+    die ID von einem gelöschten Task wird nicht neu vergeben
+  */
   getTasks(): Observable<Task[]> {
     let i;
     this.tasks = [];
@@ -37,6 +53,10 @@ export class TasksService {
     return of(this.tasks);
   }
 
+  /*
+    Fügt einen Task dem LocalStorage hinzu
+    stelle '0' im LocalStorage ist die Anzahl der To-Do's
+  */
   addTask(task: Task): void {
     let anzahl: number = localStorage.getItem('0') as unknown as number;
     if (anzahl == null) {
@@ -53,6 +73,9 @@ export class TasksService {
     localStorage.setItem('' + task.id, this.jsonObj);
   }
 
+  /*
+    Entfernt ein To-Do aus dem LocalStorage
+  */
   deleteTask(task: Task): void {
     localStorage.removeItem(task.id + '');
 
@@ -68,6 +91,12 @@ export class TasksService {
     //this.tasks.splice(i);
   }
 
+  /*
+    Wandelt den suchstring in Lower Case um und durchsucht den
+    LocalStorage nach tasks mit einem Titel der dem suchstring matched
+
+    Dabei ist es egal an welcher Stelle sich der String befindet
+  */
   searchTask(term: string): Task[] {
     term = term.toLowerCase();
     let i: string | number;
