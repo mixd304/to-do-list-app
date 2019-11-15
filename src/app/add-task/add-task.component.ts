@@ -19,6 +19,8 @@ export class AddTaskComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Hinzufügen eines neuen Tasks zum TaskService
+  // Input = Inhalte der Input-Felder
   add(title: string, description: string, tags: string): void {
     if ( !title ) { return; }
     this.task = new Task();
