@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Task } from './task';
@@ -15,7 +14,6 @@ export class TasksService {
   private tasks: Task[] = [];
 
   constructor(
-    private http: HttpClient,
   ) { }
 
   /*
