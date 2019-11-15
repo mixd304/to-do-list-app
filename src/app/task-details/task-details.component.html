@@ -1,20 +1,27 @@
+<!-- Titel -->
 <div class="form-group">
   <label for="titleInput">Titel</label>
   <input [(ngModel)]="task.title" type="text" class="form-control" id="titleInput" placeholder="Titel">
 </div>
+
+<!-- Beschreibung -->
 <div class="form-group">
   <label for="descriptionInput">Beschreibung</label>
   <textarea class="form-control" id="descriptionInput" placeholder="Beschreibung" rows="3" [(ngModel)]="task.description"></textarea>
 </div>
+
+<!-- Tags -->
 <div class="form-group">
   <label for="tagsInput">Tags</label>
   <input [ngModel]="task.tags" type="text" class="form-control" id="tagsInput" placeholder="Tags" #tags>
 </div>
 
+<!-- Buttons (Zurück/Abbrechen, Löschen, Bestätigen) -->
 <div class="btn-group" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-primary" (click)="goBack()" router-link='/table'>Zurück</button>
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="deleteClicked()">Löschen</button>
   <button type="submit" class="btn btn-success" (click)="save(tags.value)">Speichern</button>
 </div>
 
+<!-- Modaler Dialog, der beim Klicken des Löschen-Button aufgerufen wird -->
 <app-confirm-dialog (deletedEvent)="goBack()"></app-confirm-dialog>

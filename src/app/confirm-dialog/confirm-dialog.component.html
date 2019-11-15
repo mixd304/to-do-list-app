@@ -1,17 +1,20 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <!-- Überschrift -->
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Sind Sie sich sicher, dass Sie folgende Aufgaben löschen möchten?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <!-- Inhalt, der von der .ts-Datei gefüllt wird -->
       <div class="modal-body">
         <ul id="list">
 
         </ul>
       </div>
+      <!-- Buttons (zurück/abbrechen und löschen) -->
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Zurück</button>
         <button type="submit" class="btn btn-danger" (click)="deleteClicked()" data-dismiss="modal" aria-label="Close">Löschen</button>

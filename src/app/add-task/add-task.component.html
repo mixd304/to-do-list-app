@@ -1,28 +1,34 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <!-- Überschrift -->
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Hinzufügen</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <!-- Body/ Inhalt -->
       <div class="modal-body">
         <form>
+          <!-- Titel -->
           <div class="form-group">
             <label for="titleInput">Titel</label>
             <input type="text" class="form-control" id="titleInput" placeholder="Titel" #title>
           </div>
+          <!-- Beschreibung -->
           <div class="form-group">
             <label for="descriptionInput">Beschreibung</label>
             <textarea class="form-control" id="descriptionInput" placeholder="Beschreibung" rows="3" #description></textarea>
           </div>
+          <!-- Tags -->
           <div class="form-group">
             <label for="tagsInput">Tags</label>
             <input type="text" class="form-control" id="tagsInput" placeholder="Tag" #tags>
           </div>
         </form>
       </div>
+      <!-- Buttons (Zurück/ Abbrechen und Bestätigen) -->
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Zurück</button>
         <button type="submit" class="btn btn-success" (click)="add(title.value, description.value, tags.value)" data-dismiss="modal" aria-label="Close">Speichern</button>
