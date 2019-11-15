@@ -10,8 +10,6 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

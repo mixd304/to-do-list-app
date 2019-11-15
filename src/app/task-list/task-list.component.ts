@@ -26,6 +26,7 @@ export class TaskListComponent implements OnInit {
   deleteIDs: string[] = [];
   prev: boolean;
 
+  // Definierte SWIPE Aktionen
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   constructor(private taskService: TasksService, private confirmationService: ConfirmationService) { }
@@ -35,30 +36,37 @@ export class TaskListComponent implements OnInit {
     this.deleteIDs = [];
   }
 
+  // Wird ausgeführt wenn das Swiperight oder Swipeleft
+  // Und löscht den dabei geswipeden Task
   swipe(eventType, task: Task) {
     console.log(eventType);
     this.taskService.deleteTask(task);
     this.getTasks();
   }
 
+  // Bindet das Task array dieser Klasse an das Observable vom TaskService
   getTasks(): void {
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
+  // Schaltet die anzeige ob ein Task erledigt wurde um
   toggle(task: Task): void {
     console.log('Task: ' + task.title + ' checked: ' + task.checked);
     task.checked = !task.checked;
     this.taskService.updateTask(task);
   }
 
+  // übergibt den Suchstring an den TaskService
   searchTask(term: string): void {
     this.tasks = this.taskService.searchTask(term);
   }
 
+  // Blendet erledigte Tasks ein oder aus
   toogleShowDoneTasks(): void {
     this.showDoneTasks = !this.showDoneTasks;
   }
 
+  // löscht alle Markierten Tasks
   deleteTasks(): void {
     let tasksToDelete: Task[] = [];
 
@@ -69,8 +77,6 @@ export class TaskListComponent implements OnInit {
         console.log('Element == null');
       } else {
         if(element.checked) {
-          //document.getElementById('row_' + task.id).remove();
-          //this.taskService.deleteTask(task);
           tasksToDelete.push(task);
           document.getElementById("list").insertAdjacentHTML(
             'beforeend',
@@ -79,8 +85,8 @@ export class TaskListComponent implements OnInit {
         }
       }
     });
+
     this.confirmationService.setTasks(tasksToDelete);
-    //this.getTasks();
   }
 
   getValue(id: string): boolean {
