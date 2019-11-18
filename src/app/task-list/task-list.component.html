@@ -52,9 +52,15 @@
             <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
 
             <!-- Tags -->
-            <td routerLink="/details/{{task.id}}">
-              <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
+            <td>
+              <ng-template [ngIf]="task.tags[0]!==''">
+                <ng-template ngFor let-tag [ngForOf]="task.tags">
+                  <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
+                </ng-template>
+              </ng-template>
             </td>
+
+            <!-- Checkboxen zum löschen-->
             <td>
               <input type="checkbox" id="delete_{{task.id}}">
             </td>
@@ -73,9 +79,15 @@
               <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
 
               <!-- Tags -->
-              <td routerLink="/details/{{task.id}}">
-              <span *ngFor="let tag of task.tags"> <button type="button" class="btn btn-primary btn-sm mr-2">{{tag}}</button> </span>
-            </td>
+              <td>
+                <ng-template [ngIf]="task.tags[0]!==''">
+                  <ng-template ngFor let-tag [ngForOf]="task.tags">
+                    <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
+                  </ng-template>
+                </ng-template>
+              </td>
+
+            <!-- Checkboxen zum löschen-->
             <td>
               <input type="checkbox" id="delete_{{task.id}}">
             </td>
@@ -85,6 +97,8 @@
     </tbody>
   </table>
 </div>
+
 <!-- Modaler Inhalt für das Hinzufügen-->
 <app-add-task (saved)="getTasks()"></app-add-task>
+<!-- Modaler Inhalt für den Confirm Button -->
 <app-confirm-dialog (deletedEvent)="getTasks()"></app-confirm-dialog>

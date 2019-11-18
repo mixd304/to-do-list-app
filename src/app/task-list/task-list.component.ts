@@ -69,6 +69,10 @@ export class TaskListComponent implements OnInit {
     this.showDoneTasks = !this.showDoneTasks;
   }
 
+  tagClicked(): void {
+    console.log("Hallo");
+  }
+
   // löscht alle Markierten Tasks
   deleteTasks(): void {
     let tasksToDelete: Task[] = [];
