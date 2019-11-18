@@ -74,19 +74,19 @@ export class TaskListComponent implements OnInit {
   // Button "Zurücksetzen geklickt"
   resetFilter(): void {
     this.getTasks();
-    document.getElementById('resetButton').setAttribute('disabled','');
+    document.getElementById('resetButton').setAttribute('disabled', '');
   }
 
   // Funktion die aufgerufen wird wenn ein Tag in der Liste geclicked wird
   tagClicked(tag: string): void {
     document.getElementById('resetButton').removeAttribute('disabled');
-    console.log("Tag: " + tag);
+    console.log('Tag: ' + tag);
     this.tasks = this.taskService.filterTaskByTag(tag);
   }
 
   // löscht alle Markierten Tasks
   deleteTasks(): void {
-    let tasksToDelete: Task[] = [];
+    const tasksToDelete: Task[] = [];
 
     this.tasks.forEach(task => {
       const element: HTMLInputElement = document.getElementById('delete_' + task.id) as unknown as HTMLInputElement;
@@ -94,7 +94,7 @@ export class TaskListComponent implements OnInit {
       if (element == null) {
         console.log('Element == null');
       } else {
-        if(element.checked) {
+        if (element.checked) {
           tasksToDelete.push(task);
           document.getElementById('list').insertAdjacentHTML(
             'beforeend',
