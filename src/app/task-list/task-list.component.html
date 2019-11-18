@@ -40,12 +40,39 @@
         <!--@flyOut @flyOut (swiperight)="swipe($event.type, task)" id="flyOut_{{task.id}} -->
 
         <!-- Status -->
-          <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
-          <ng-template [ngIf]="task.checked==false">
+        <!-- Wenn der Task noch nicht erledigt wurde, wird er angezeigt -->
+        <ng-template [ngIf]="task.checked==false">
 
-            <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+          <!-- Einen Button zum abhaken ausgeben wenn die Aufgabe noch nicht erfüllt wurde -->
+          <td class="checked">
+            <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
+          </td>
+
+          <!-- Titel -->
+          <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
+
+          <!-- Tags -->
+          <td>
+            <ng-template [ngIf]="task.tags[0]!==''">
+              <ng-template ngFor let-tag [ngForOf]="task.tags">
+                <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
+              </ng-template>
+            </ng-template>
+          </td>
+
+          <!-- Checkboxen zum löschen-->
+          <td>
+            <input type="checkbox" id="delete_{{task.id}}">
+          </td>
+
+        </ng-template>
+
+        <!-- Wenn der Task bereits erledigt wurde, wird er nur angezeigt, wenn die Checkbox ausgewählt wurde -->
+        <ng-template [ngIf]="task.checked==true">
+          <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
+          <ng-template [ngIf]="showDoneTasks==true">
             <td class="checked">
-              <button type="button" class="btn btn-danger" (click)="toggle(task)"> <i class="fas fa-ban"></i> </button>
+              <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
             </td>
 
             <!-- Titel -->
@@ -59,33 +86,6 @@
                 </ng-template>
               </ng-template>
             </td>
-
-            <!-- Checkboxen zum löschen-->
-            <td>
-              <input type="checkbox" id="delete_{{task.id}}">
-            </td>
-
-          </ng-template>
-
-          <!-- Wenn der Task bereits erledigt wurde, wird er nur angezeigt, wenn die Checkbox ausgewählt wurde -->
-          <ng-template [ngIf]="task.checked==true">
-            <!-- Button zum löschen ausgeben wenn die Aufgabe bereits erfüllt wurde -->
-            <ng-template [ngIf]="showDoneTasks==true">
-              <td class="checked">
-                <button type="button" class="btn btn-success" (click)="toggle(task)"> <i class="fas fa-check"></i> </button>
-              </td>
-
-              <!-- Titel -->
-              <td routerLink="/details/{{task.id}}" data-toggle="tooltip" data-placement="top" title="{{task.description}}"> {{ task.title }} </td>
-
-              <!-- Tags -->
-              <td>
-                <ng-template [ngIf]="task.tags[0]!==''">
-                  <ng-template ngFor let-tag [ngForOf]="task.tags">
-                    <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
-                  </ng-template>
-                </ng-template>
-              </td>
 
             <!-- Checkboxen zum löschen-->
             <td>
