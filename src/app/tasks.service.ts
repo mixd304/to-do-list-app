@@ -111,6 +111,11 @@ export class TasksService {
     return this.tasks;
   }
 
+  /*
+    Funktioniert ähnlich wie die Suchfunktion,
+    überprüft aber die Tags und nicht die Titel der
+    gespeicherten Aufgaben
+  */
   filterTaskByTag(tag: string): Task[] {
 
     tag = tag.toLowerCase();
