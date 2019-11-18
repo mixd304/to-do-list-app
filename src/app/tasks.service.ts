@@ -110,4 +110,32 @@ export class TasksService {
     }
     return this.tasks;
   }
+
+  filterTaskByTag(tag: string): Task[] {
+
+    tag = tag.toLowerCase();
+    let i: number;
+
+    this.tasks = [];
+
+    for (i = 1; i <= (localStorage.getItem('0') as unknown as number); i++) {
+
+      const task: Task = JSON.parse(localStorage.getItem('' + i)) as Task;
+
+      if (task == null) {
+
+      } else {
+
+        task.tags.forEach(element => {
+
+          if (element.toLowerCase().match('.*' + tag + '.*')) {
+            this.tasks.push(task);
+
+          }
+        });
+      }
+    }
+
+    return this.tasks;
+  }
 }

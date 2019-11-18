@@ -5,6 +5,7 @@ import { TasksService } from '../tasks.service';
 import { trigger, transition, useAnimation, state, style } from '@angular/animations';
 import { slideOutRight, slideInLeft } from 'ng-animate';
 import { ConfirmationService } from '../confirmation.service';
+import { element } from 'protractor';
 
 /*
   Klasse zum Anzeigen der To-Do's in einer Liste
@@ -61,6 +62,7 @@ export class TaskListComponent implements OnInit {
 
   // übergibt den Suchstring an den TaskService
   searchTask(term: string): void {
+    document.getElementById('resetButton').removeAttribute('disabled');
     this.tasks = this.taskService.searchTask(term);
   }
 
@@ -69,8 +71,17 @@ export class TaskListComponent implements OnInit {
     this.showDoneTasks = !this.showDoneTasks;
   }
 
-  tagClicked(): void {
-    console.log("Hallo");
+  // Button "Zurücksetzen geklickt"
+  resetFilter(): void {
+    this.getTasks();
+    document.getElementById('resetButton').setAttribute('disabled','');
+  }
+
+  // Funktion die aufgerufen wird wenn ein Tag in der Liste geclicked wird
+  tagClicked(tag: string): void {
+    document.getElementById('resetButton').removeAttribute('disabled');
+    console.log("Tag: " + tag);
+    this.tasks = this.taskService.filterTaskByTag(tag);
   }
 
   // löscht alle Markierten Tasks

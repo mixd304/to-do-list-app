@@ -1,7 +1,13 @@
 <!-- Hinzufügen-Button und Löschen Button -->
 <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Hinzufügen</button>
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="deleteTasks()">Löschen</button>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+    <i class="fas fa-plus"></i>
+  </button>
+
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="deleteTasks()">
+      <i class="fas fa-trash"></i>
+  </button>
 
   <!-- Auswahlfeld für das Anzeigen von erledigten ToDos -->
   <div class="input-group">
@@ -20,6 +26,9 @@
     </div>
     <input type="text" class="form-control" placeholder="Suche" aria-label="Input group example" aria-describedby="btnGroupAddon" (change)="searchTask($event.target.value)">
   </div>
+
+  <!-- Filter Reseten-->
+  <button type="button" class="btn btn-secondary" (click)="resetFilter()" id="resetButton" disabled>Zurücksetzen</button>
 </div>
 
 <!-- Tabelle -->
@@ -55,7 +64,7 @@
           <td>
             <ng-template [ngIf]="task.tags[0]!==''">
               <ng-template ngFor let-tag [ngForOf]="task.tags">
-                <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
+                <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked(tag)">{{tag}}</button>
               </ng-template>
             </ng-template>
           </td>
@@ -82,7 +91,7 @@
             <td>
               <ng-template [ngIf]="task.tags[0]!==''">
                 <ng-template ngFor let-tag [ngForOf]="task.tags">
-                  <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked()">{{tag}}</button>
+                  <button type="button" class="btn btn-primary btn-sm mr-2" (click)="tagClicked(tag)">{{tag}}</button>
                 </ng-template>
               </ng-template>
             </td>
