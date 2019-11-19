@@ -5,6 +5,9 @@ import { TasksService } from '../tasks.service';
 import { Task } from '../task';
 import { ConfirmationService } from '../confirmation.service';
 
+/*
+  Zeigt die Details eines To-Do's
+*/
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
@@ -23,11 +26,18 @@ export class TaskDetailsComponent implements OnInit {
     this.getTask();
   }
 
+  /*
+    ließt die id des aufgerufenen To-Do's aus der URL
+  */
   getTask(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.task = this.tasksService.getTask(id);
   }
 
+  /*
+    splittet die Tags aus dem entsprechenden Tag input Feld
+    und übergibt den Task zum speichern an den TaskService
+  */
   save(tags: string): void {
     this.tagArray = tags.split(',');
     this.task.tags = this.tagArray;
@@ -35,6 +45,7 @@ export class TaskDetailsComponent implements OnInit {
     this.goBack();
   }
 
+  // Eine Seite zurück
   goBack(): void {
     this.location.back();
   }
@@ -43,13 +54,15 @@ export class TaskDetailsComponent implements OnInit {
     return index;
   }
 
+  // löscht den gewählten Task
   delete(): void {
     this.tasksService.deleteTask(this.task);
     this.goBack();
   }
 
+  // fügt die überschrift des gewählten To-Do zu dem Modalen Confirm Dialog
   deleteClicked(): void {
-    document.getElementById("list").insertAdjacentHTML(
+    document.getElementById('list').insertAdjacentHTML(
       'beforeend',
       '<li>' + this.task.title + '</li>'
     );

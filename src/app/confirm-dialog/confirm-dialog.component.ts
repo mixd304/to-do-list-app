@@ -23,6 +23,8 @@ export class ConfirmDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  // bekommt vom COnfirmationService die zum löschen angefragten To-Do's
+  // und löscht diese der Reihe nach
   deleteClicked(): void {
     this.tasks = this.confirmationService.getTasks();
     this.tasks.forEach(task => {
@@ -32,7 +34,4 @@ export class ConfirmDialogComponent implements OnInit {
     this.deletedEvent.emit('deleted');
   }
 
-  goBack(): void {
-    this.location.back();
-  }
 }
