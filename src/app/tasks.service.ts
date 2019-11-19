@@ -132,12 +132,11 @@ export class TasksService {
       } else {
 
         task.tags.forEach(element => {
-
-          if (element.toLowerCase().match('.*' + tag + '.*')) {
+          if (element.toLowerCase() === tag) {
             this.tasks.push(task);
-
           }
         });
+
       }
     }
 
